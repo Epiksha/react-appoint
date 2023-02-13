@@ -9,7 +9,7 @@ const CalendarColumn: React.FC<IColumn> = ({
     label,
 }) => {
     const handleColumnClick = (date: Dayjs) => {
-
+        console.log(date.format("DD MMMM YYYY"));
     };
 
     return (
