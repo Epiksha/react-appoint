@@ -1,5 +1,6 @@
 import React from "react";
 import classNames from "classnames";
+import { Dayjs } from "dayjs";
 
 import CalendarBody from "../CalendarBody/CalendarBody";
 import CalendarHeader from "../CalendarHeader/CalendarHeader";
@@ -10,6 +11,7 @@ interface ICalendarProps {
     appointments: string[];
     dateRange: TRange;
     rangeType: TRangeType;
+    handleColumnClick(date: Dayjs): void;
     times: ITimes;
 }
 
@@ -17,6 +19,7 @@ const Calendar: React.FC<ICalendarProps> = ({
     appointments,
     dateRange,
     rangeType,
+    handleColumnClick,
     times,
 }) => {
     return (
@@ -31,6 +34,7 @@ const Calendar: React.FC<ICalendarProps> = ({
                 dateRange={dateRange}
                 rangeType={rangeType}
                 times={times}
+                handleColumnClick={handleColumnClick}
             />
         </div>
     );

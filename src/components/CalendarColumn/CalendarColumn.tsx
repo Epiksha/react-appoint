@@ -3,15 +3,16 @@ import { Dayjs } from "dayjs";
 
 import { IColumn } from "../../models/date";
 
-const CalendarColumn: React.FC<IColumn> = ({
+interface ICalendarColumnProps extends IColumn {
+    handleColumnClick(date: Dayjs): void;
+}
+
+const CalendarColumn: React.FC<ICalendarColumnProps> = ({
     className,
     date,
+    handleColumnClick,
     label,
 }) => {
-    const handleColumnClick = (date: Dayjs) => {
-        console.log(date.format("DD MMMM YYYY"));
-    };
-
     return (
         <button
             key={date.format("YYYY-MM-DDTHH:mm:ssZ")}
