@@ -1,6 +1,7 @@
 /// <reference types="react" />
-import { TRangeType } from "../../models/date";
+import { TRange, TRangeType } from "../../models/date";
 interface IHeaderProps {
+    dateRange: TRange;
     handleRangeChange(type: TRangeType): void;
     rangeType: TRangeType;
 }

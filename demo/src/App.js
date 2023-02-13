@@ -11,14 +11,16 @@ const App = () => {
 
     return (
         <div className="App">
-            <ReactAppoint times={{
-                start: 9,
-                end: 17,
-                intervals: {
-                    unit: "h",
-                    value: 1,
-                }
-            }} />
+            <ReactAppoint
+                times={{
+                    start: 9,
+                    end: 17,
+                    intervals: {
+                        unit: "h",
+                        value: 1,
+                    }
+                }}
+            />
         </div>
     );
 };

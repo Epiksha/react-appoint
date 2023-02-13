@@ -22,7 +22,7 @@
     }
 
     &--blur {
-        color: gray;
+        color: $color-gray-1;
     }
 
     .ra-calendar--day & {
@@ -31,11 +31,11 @@
             align-items: center;
 
             max-width: 80px;
-            border-right: solid 1px gray;
+            border-right: solid 1px $color-gray-1;
         }
 
         &:not(:nth-last-of-type(-n+2)) {
-            border-bottom: solid 1px gray;
+            border-bottom: solid 1px $color-gray-1;
         }
     }
 
@@ -49,11 +49,11 @@
         }
 
         &:not(:nth-child(8n)) {
-            border-right: solid 1px gray;
+            border-right: solid 1px $color-gray-1;
         }
 
         &:not(:nth-last-of-type(-n+8)) {
-            border-bottom: solid 1px gray;
+            border-bottom: solid 1px $color-gray-1;
         }
     }
 
@@ -63,11 +63,11 @@
         font-size: 1rem;
 
         &:not(:nth-child(7n)) {
-            border-right: solid 1px gray;
+            border-right: solid 1px $color-gray-1;
         }
 
         &:not(:nth-last-of-type(-n+7)) {
-            border-bottom: solid 1px gray;
+            border-bottom: solid 1px $color-gray-1;
         }
     }
 
@@ -91,7 +91,7 @@
                 height: 2rem;
                 border-radius: 50%;
 
-                background-color: blue;
+                background-color: $color-primary;
             }
         }
     }

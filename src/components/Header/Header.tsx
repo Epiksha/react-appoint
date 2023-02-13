@@ -1,8 +1,11 @@
 import classNames from "classnames";
+import { useEffect, useState } from "react";
 
-import { TRangeType } from "../../models/date";
+import { generateLabel } from "../../helpers/label.helper";
+import { TRange, TRangeType } from "../../models/date";
 
 interface IHeaderProps {
+    dateRange: TRange
     handleRangeChange(type: TRangeType): void;
     rangeType: TRangeType;
 }
@@ -10,13 +13,32 @@ interface IHeaderProps {
 const optionLabels = ["Day", "Week", "Month"];
 
 const Header: React.FC<IHeaderProps> = ({
+    dateRange,
     handleRangeChange,
     rangeType,
 }) => {
+    const [currentLabel, setCurrentLabel] = useState(generateLabel(rangeType, dateRange));
+
+    useEffect(() => {
+        setCurrentLabel(generateLabel(rangeType, dateRange));
+    }, [dateRange, rangeType]);
+
     return (
         <header className="ra-header">
             <div className="ra-header__range">
-                <p>&lt; 11 - 17 FEBRUARY 2023 &gt;</p>
+                <button
+                    className="ra-header__range-trigger ra-header__range-trigger--previous"
+                >
+                    &lt;
+                </button>
+
+                <p>{currentLabel}</p>
+
+                <button
+                    className="ra-header__range-trigger ra-header__range-trigger--next"
+                >
+                    &gt;
+                </button>
             </div>
 
             <div className="ra-header__options">

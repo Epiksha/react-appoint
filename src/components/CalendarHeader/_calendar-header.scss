@@ -1,7 +1,7 @@
 .ra-calendar-header {
     display: grid;
 
-    border: solid 1px gray;
+    border: solid 1px $color-gray-1;
 
     .ra-calendar--day & {
         grid-template-columns: 5rem auto;
@@ -21,7 +21,7 @@
         padding: 0.5rem;
 
         &:not(:last-child) {
-            border-right: solid 1px gray;
+            border-right: solid 1px $color-gray-1;
         }
 
         &--blank {

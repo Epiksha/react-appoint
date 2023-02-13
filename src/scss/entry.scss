@@ -1,3 +1,8 @@
+// Global
+@import "variables";
+@import "global";
+
+// Components
 @import "../components/CalendarBody/calendar-body";
 @import "../components/CalendarColumn/calendar-column";
 @import "../components/CalendarHeader/calendar-header";
