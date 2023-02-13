@@ -5,8 +5,9 @@ import { generateLabel } from "../../helpers/label.helper";
 import { TRange, TRangeType } from "../../models/date";
 
 interface IHeaderProps {
-    dateRange: TRange
-    handleRangeChange(type: TRangeType): void;
+    dateRange: TRange;
+    handleDateRangeChange(direction: "previous" | "next"): void;
+    handleRangeTypeChange(type: TRangeType): void;
     rangeType: TRangeType;
 }
 
@@ -14,7 +15,8 @@ const optionLabels = ["Day", "Week", "Month"];
 
 const Header: React.FC<IHeaderProps> = ({
     dateRange,
-    handleRangeChange,
+    handleDateRangeChange,
+    handleRangeTypeChange,
     rangeType,
 }) => {
     const [currentLabel, setCurrentLabel] = useState(generateLabel(rangeType, dateRange));
@@ -28,6 +30,7 @@ const Header: React.FC<IHeaderProps> = ({
             <div className="ra-header__range">
                 <button
                     className="ra-header__range-trigger ra-header__range-trigger--previous"
+                    onClick={() => handleDateRangeChange("previous")}
                 >
                     &lt;
                 </button>
@@ -36,6 +39,7 @@ const Header: React.FC<IHeaderProps> = ({
 
                 <button
                     className="ra-header__range-trigger ra-header__range-trigger--next"
+                    onClick={() => handleDateRangeChange("next")}
                 >
                     &gt;
                 </button>
@@ -46,7 +50,7 @@ const Header: React.FC<IHeaderProps> = ({
                     <button
                         key={label}
                         className={classNames("ra-header__option", { "ra-header__option--active": label.toLowerCase() === rangeType})}
-                        onClick={() => handleRangeChange(label.toLowerCase() as TRangeType)}
+                        onClick={() => handleRangeTypeChange(label.toLowerCase() as TRangeType)}
                     >
                         {label}
                     </button>

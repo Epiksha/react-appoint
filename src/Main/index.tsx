@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import dayjs from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 import minMax from "dayjs/plugin/minMax";
 
 import Calendar from "../components/Calendar/Calendar";
@@ -30,12 +30,23 @@ const ReactAppoint: React.FC<IReactAppointProps> = ({
         setDateRange(getRange(rangeType, times));
     }, [rangeType]);
 
+    const handleDateRangeChange = (direction: "previous" | "next") => {
+        let startDate: Dayjs = dateRange.headers[0].date;
+        let endDate: Dayjs = dateRange.headers[dateRange.headers.length - 1].date;
+
+        startDate = startDate[direction === "previous" ? "subtract" : "add"](1, rangeType);
+        endDate = endDate[direction === "previous" ? "subtract" : "add"](1, rangeType);
+
+        setDateRange(getRange(rangeType, times, startDate, endDate));
+    };
+
     return (
         <div className="ra-container">
             <Header
                 dateRange={dateRange}
                 rangeType={rangeType}
-                handleRangeChange={setRangeType}
+                handleDateRangeChange={handleDateRangeChange}
+                handleRangeTypeChange={setRangeType}
             />
 
             <Calendar
