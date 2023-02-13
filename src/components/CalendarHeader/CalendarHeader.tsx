@@ -21,7 +21,7 @@ const CalendarHeader: React.FC<ICalendarHeaderProps> = ({
 
             {dateRange.headers.map((item: ICalendarHeader) => (
                 <div
-                    key={item.primaryLabel + item.secondaryLabel}
+                    key={item.date.format("DD MM YY hh:mm:ss")}
                     className={classNames(
                         "ra-calendar-header__item",
                         { "ra-calendar-header__item--current": dayjs().format("DD MM YY") === item.date.format("DD MM YY")}

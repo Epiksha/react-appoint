@@ -33,6 +33,10 @@
                 max-width: 80px;
             }
         }
+
+        &--current {
+            color: $color-primary;
+        }
     }
 
     &__primary-label {

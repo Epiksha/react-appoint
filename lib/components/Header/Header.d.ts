@@ -2,7 +2,8 @@
 import { TRange, TRangeType } from "../../models/date";
 interface IHeaderProps {
     dateRange: TRange;
-    handleRangeChange(type: TRangeType): void;
+    handleDateRangeChange(direction: "previous" | "next"): void;
+    handleRangeTypeChange(type: TRangeType): void;
     rangeType: TRangeType;
 }
 declare const Header: React.FC<IHeaderProps>;

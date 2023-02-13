@@ -1,4 +1,4 @@
-import dayjs from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 
 import { ICalendarHeader, IColumn, TRange, TRangeType } from "../models/date";
 import { ITimes } from "../models/times";
@@ -71,8 +71,8 @@ export const getDay = (
 export const getWeekRange = (
     times: ITimes,
     rangeType: TRangeType,
-    startDate = dayjs().startOf("week"),
-    endDate = dayjs().endOf("week"),
+    startDate: Dayjs,
+    endDate: Dayjs,
 ) => {
     const week: TRange = {
         headers: [],
@@ -97,19 +97,15 @@ export const getWeekRange = (
 };
 
 export const getMonthRange = (
-    startDate = dayjs().startOf("month"),
-    endDate = dayjs().endOf("month"),
+    startDate: Dayjs,
+    endDate: Dayjs,
 ) => {
     const month: TRange = {
         headers: [],
         items: [],
     };
 
-    startDate = startDate.startOf("month");
-    endDate = endDate.endOf("month");
-
-    let tempStartDate = startDate.startOf("month");
-    let tempEndDate = endDate.endOf("month");
+    let visualEndDate = endDate.endOf("month");
     let tempDate = startDate.startOf("month");
 
     if (tempDate.day() < 1) {
@@ -118,17 +114,15 @@ export const getMonthRange = (
         tempDate = tempDate.subtract(tempDate.day(), "day").add(1, "day");
     }
 
-    if (tempEndDate.day() < 1) {
-        tempEndDate = tempEndDate.add(1, "day");
-    } else if (tempEndDate.day()) {
-        tempEndDate = tempEndDate.endOf("week").add(1, "day");
+    if (visualEndDate.day() < 1) {
+        visualEndDate = visualEndDate.add(1, "day");
+    } else if (visualEndDate.day()) {
+        visualEndDate = visualEndDate.endOf("week").add(1, "day");
     }
 
-    while (tempDate.isBefore(tempEndDate) || tempDate.isSame(tempEndDate)) {
-        const formattedDay = tempDate.format("ddd");
-
-        if (!month.headers.find(item => item.primaryLabel === formattedDay)) {
-            month.headers.push({ primaryLabel: formattedDay, date: tempDate });
+    while (tempDate.isBefore(visualEndDate) || tempDate.isSame(visualEndDate)) {
+        if (!month.headers.find(item => item.primaryLabel === tempDate.format("ddd"))) {
+            month.headers.push({ primaryLabel: tempDate.format("ddd"), date: tempDate });
         }
 
         const column: IColumn = {
@@ -137,7 +131,7 @@ export const getMonthRange = (
             label: tempDate.format("DD"),
         };
 
-        if (tempDate.isBefore(tempStartDate) || tempDate.isAfter(endDate)) {
+        if (tempDate.isBefore(startDate) || tempDate.isAfter(endDate)) {
             column.className = "ra-calendar-column--blur";
         } else if (tempDate.format("YYYY-MMMM-DD") === dayjs().format("YYYY-MMMM-DD")) {
             column.className = "ra-calendar-column--current";
@@ -151,13 +145,55 @@ export const getMonthRange = (
     return month;
 };
 
+export const getNewStartAndEndDates = (
+    dateRange: TRange,
+    rangeType: TRangeType,
+    direction: "previous" | "next",
+) => {
+    let startDate: Dayjs = dateRange.headers[0].date;
+    let endDate: Dayjs = dateRange.headers[dateRange.headers.length - 1].date;
+
+    if (rangeType === "day") {
+        startDate = startDate[direction === "previous" ? "subtract" : "add"](1, "day");
+        endDate = startDate[direction === "previous" ? "subtract" : "add"](1, "day");
+    } else if (rangeType === "week") {
+        startDate = startDate[direction === "previous" ? "subtract" : "add"](1, "week");
+        endDate = endDate[direction === "previous" ? "subtract" : "add"](1, "week");
+    } else {
+        const occurrences: { [key: string]: number } = {};
+
+        dateRange.items.forEach(item => {
+            if (!occurrences[item.date.format("MMMM")]) {
+                occurrences[item.date.format("MMMM")] = 1;
+            } else {
+                occurrences[item.date.format("MMMM")]++;
+            }
+        });
+
+        let currentMonth: string = "";
+
+        Object.keys(occurrences).forEach(key => {
+            if (currentMonth === "" || occurrences[key] > occurrences[currentMonth]) {
+                currentMonth = key;
+            }
+        });
+
+        const itemInMonth = dateRange.items.find(item => item.date.format("MMMM") === currentMonth);
+
+        startDate = (itemInMonth as IColumn).date[direction === "previous" ? "subtract" : "add"](1, "month").startOf("month");
+        endDate = (itemInMonth as IColumn).date[direction === "previous" ? "subtract" : "add"](1, "month").endOf("month");
+    }
+
+    return { startDate, endDate };
+};
+
 export const getRange = (
     rangeType: TRangeType,
     times: ITimes,
-    startDate = dayjs().startOf("week"),
-    endDate = dayjs().endOf("week"),
+    startDate = dayjs().startOf(rangeType),
+    endDate = dayjs().endOf(rangeType),
 ) => {
-    if (rangeType === "day") return getDay(dayjs(), times, rangeType);
+    if (rangeType === "day") return getDay(startDate, times, rangeType);
     if (rangeType === "week") return getWeekRange(times, rangeType, startDate, endDate);
 
     return getMonthRange(startDate, endDate);

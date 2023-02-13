@@ -3,7 +3,7 @@ import dayjs, { Dayjs } from "dayjs";
 import minMax from "dayjs/plugin/minMax";
 
 import Calendar from "../components/Calendar/Calendar";
-import { getRange } from "../helpers/date.helper";
+import { getNewStartAndEndDates, getRange } from "../helpers/date.helper";
 import Header from "../components/Header/Header";
 import { IReactAppointProps } from "../models/main";
 import { TRange, TRangeType } from "../models/date";
@@ -31,11 +31,7 @@ const ReactAppoint: React.FC<IReactAppointProps> = ({
     }, [rangeType]);
 
     const handleDateRangeChange = (direction: "previous" | "next") => {
-        let startDate: Dayjs = dateRange.headers[0].date;
-        let endDate: Dayjs = dateRange.headers[dateRange.headers.length - 1].date;
-
-        startDate = startDate[direction === "previous" ? "subtract" : "add"](1, rangeType);
-        endDate = endDate[direction === "previous" ? "subtract" : "add"](1, rangeType);
+        const { startDate, endDate } = getNewStartAndEndDates(dateRange, rangeType, direction);
 
         setDateRange(getRange(rangeType, times, startDate, endDate));
     };
