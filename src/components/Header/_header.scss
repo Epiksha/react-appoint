@@ -1,0 +1,25 @@
+.ra-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__options {
+        display: flex;
+        gap: 1rem;
+    }
+
+    &__option {
+        border: none;
+
+        background-color: transparent;
+
+        font-weight: 600;
+        text-transform: uppercase;
+
+        cursor: pointer;
+
+        &--active {
+            color: blue;
+        }
+    }
+}

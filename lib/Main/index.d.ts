@@ -1,3 +1,5 @@
 import React from "react";
-declare const ReactAppoint: React.FC;
+import { IReactAppointProps } from "../models/main";
+import "../scss/entry.scss";
+declare const ReactAppoint: React.FC<IReactAppointProps>;
 export default ReactAppoint;

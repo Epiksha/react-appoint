@@ -1,0 +1,18 @@
+.ra-calendar-body {
+    display: grid;
+
+    border: solid 1px gray;
+    border-top: none;
+
+    .ra-calendar--day & {
+        grid-template-columns: 5rem auto;
+    }
+
+    .ra-calendar--week & {
+        grid-template-columns: 80px repeat(7, 1fr);
+    }
+
+    .ra-calendar--month & {
+        grid-template-columns: repeat(7, 1fr);
+    }
+}
