@@ -139,8 +139,8 @@ export const getMonthRange = (
 
         if (tempDate.isBefore(tempStartDate) || tempDate.isAfter(endDate)) {
             column.className = "ra-calendar-column--blur";
-        } else if (tempDate.isSame(dayjs())) {
-            column.className = "ra-calendar-column--blur";
+        } else if (tempDate.format("YYYY-MMMM-DD") === dayjs().format("YYYY-MMMM-DD")) {
+            column.className = "ra-calendar-column--current";
         }
 
         month.items.push(column);

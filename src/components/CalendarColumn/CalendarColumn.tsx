@@ -18,7 +18,7 @@ const CalendarColumn: React.FC<IColumn> = ({
             className={classNames("ra-calendar-column", className)}
             onClick={() => handleColumnClick(date)}
         >
-            {label}
+            <span className="ra-calendar-column__label">{label}</span>
         </button>
     );
 };
