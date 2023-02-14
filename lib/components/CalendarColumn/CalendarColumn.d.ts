@@ -1,4 +1,8 @@
 /// <reference types="react" />
+import { Dayjs } from "dayjs";
 import { IColumn } from "../../models/date";
-declare const CalendarColumn: React.FC<IColumn>;
+interface ICalendarColumnProps extends IColumn {
+    handleColumnClick(date: Dayjs): void;
+}
+declare const CalendarColumn: React.FC<ICalendarColumnProps>;
 export default CalendarColumn;

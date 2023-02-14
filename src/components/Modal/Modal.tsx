@@ -32,7 +32,7 @@ const Modal: React.FC<IModalProps> = ({
             onClick={handleModalClick}
         >
             <div className="modal__box">
-                {currentDate}
+                {currentDate.format("DD MMMM YYYY")}
             </div>
         </div>
     );

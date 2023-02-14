@@ -114,9 +114,7 @@ export const getMonthRange = (
         tempDate = tempDate.subtract(tempDate.day(), "day").add(1, "day");
     }
 
-    if (visualEndDate.day() < 1) {
-        visualEndDate = visualEndDate.add(1, "day");
-    } else if (visualEndDate.day()) {
+    if (visualEndDate.day()) {
         visualEndDate = visualEndDate.endOf("week").add(1, "day");
     }
 

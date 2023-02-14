@@ -22,8 +22,8 @@ const CalendarBody: React.FC<ICalendarBodyProps> = ({
             {dateRange.items.map((column: any) => (
                 <CalendarColumn
                     key={column.key}
-                    handleColumClick={handleColumnClick}
                     {...column}
+                    handleColumnClick={handleColumnClick}
                 />
             ))}
         </div>
