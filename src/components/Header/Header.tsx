@@ -35,7 +35,7 @@ const Header: React.FC<IHeaderProps> = ({
                     &lt;
                 </button>
 
-                <p>{currentLabel}</p>
+                <p className="ra-header__range-label">{currentLabel}</p>
 
                 <button
                     className="ra-header__range-trigger ra-header__range-trigger--next"
@@ -46,15 +46,17 @@ const Header: React.FC<IHeaderProps> = ({
             </div>
 
             <div className="ra-header__options">
-                {optionLabels.map(label => (
-                    <button
-                        key={label}
-                        className={classNames("ra-header__option", { "ra-header__option--active": label.toLowerCase() === rangeType})}
-                        onClick={() => handleRangeTypeChange(label.toLowerCase() as TRangeType)}
-                    >
-                        {label}
-                    </button>
-                ))}
+                <div className="ra-header__options-container">
+                    {optionLabels.map(label => (
+                        <button
+                            key={label}
+                            className={classNames("ra-header__option", { "ra-header__option--active": label.toLowerCase() === rangeType})}
+                            onClick={() => handleRangeTypeChange(label.toLowerCase() as TRangeType)}
+                        >
+                            {label}
+                        </button>
+                    ))}
+                </div>
             </div>
         </header>
     );

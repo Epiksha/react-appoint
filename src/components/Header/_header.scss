@@ -1,14 +1,29 @@
 .ra-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+
+    flex-direction: column;
+
+    @include tablet {
+        flex-direction: row;
+        align-items: center;
+
+        margin-bottom: 1rem;
+    }
 
     &__range {
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: space-between;
         gap: 1rem;
         text-align: center;
+    }
+
+    &__range-label {
+        display: block;
+
+        min-width: 170px;
+        margin: 0;
 
         font-size: 1.2rem;
         font-weight: 600;
@@ -37,7 +52,27 @@
 
     &__options {
         display: flex;
-        gap: 1rem;
+        justify-content: center;
+
+        width: 100%;
+        padding: 1rem 0;
+
+        @include tablet {
+            justify-content: flex-end;
+            align-items: center;
+
+            width: auto;
+            padding: 0;
+        }
+    }
+
+    &__options-container {
+        display: flex;
+        gap: 2rem;
+
+        @include tablet {
+            gap: 1rem;
+        }
     }
 
     &__option {
@@ -45,7 +80,9 @@
 
         background-color: transparent;
 
+        font-size: 1rem;
         font-weight: 600;
+        line-height: 1;
         text-transform: uppercase;
 
         cursor: pointer;

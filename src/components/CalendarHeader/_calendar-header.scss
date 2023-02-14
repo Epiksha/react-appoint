@@ -18,10 +18,18 @@
 
     &__item {
         box-sizing: border-box;
-        padding: 0.5rem;
+        padding: 5px;
 
         &:not(:last-child) {
             border-right: solid 1px $color-gray-1;
+        }
+
+        .ra-calendar--week & {
+            text-align: center;
+        }
+
+        .ra-calendar--month & {
+            min-width: 49px;
         }
 
         &--blank {
@@ -42,7 +50,19 @@
     &__primary-label {
         margin: 0;
 
-        font-size: 1.2rem;
+        font-size: 0.8rem;
+
+        @include tablet {
+            font-size: 1.2rem;
+        }
+
+        .ra-calendar--day & {
+            font-size: 1.2rem;
+        }
+
+        .ra-calendar--month & {
+            font-size: 1.2rem;
+        }
     }
 
     &__secondary-label {
