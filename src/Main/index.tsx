@@ -1,20 +1,35 @@
-import React, { useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import dayjs, { Dayjs } from "dayjs";
 import minMax from "dayjs/plugin/minMax";
 
 import Calendar from "../components/Calendar/Calendar";
 import { getNewStartAndEndDates, getRange } from "../helpers/date.helper";
 import Header from "../components/Header/Header";
-import { IReactAppointProps } from "../models/main";
+import { IAppointment } from "../models/appointment";
+import { ITimes } from "../models/times";
 import Modal from "../components/Modal/Modal";
 import { TRange, TRangeType } from "../models/date";
 import "../scss/entry.scss";
 
 dayjs.extend(minMax);
 
+interface IReactAppointProps {
+    appointments: IAppointment[];
+    defaultViewType?: TRangeType;
+    isModalOpen: boolean;
+    modalContent: React.ReactNode;
+    onDateClick(date: Dayjs): void;
+    setIsModalOpen: Dispatch<SetStateAction<boolean>>;
+    times?: ITimes;
+}
+
 const ReactAppoint: React.FC<IReactAppointProps> = ({
     appointments,
     defaultViewType = "month",
+    isModalOpen,
+    setIsModalOpen,
+    modalContent,
+    onDateClick,
     times = {
         start: 9,
         end: 17,
@@ -26,8 +41,6 @@ const ReactAppoint: React.FC<IReactAppointProps> = ({
 }) => {
     const [rangeType, setRangeType] = useState<TRangeType>(defaultViewType);
     const [dateRange, setDateRange] = useState<TRange>(getRange(rangeType, times));
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [modalDate, setModalDate] = useState(dayjs());
 
     useEffect(() => {
         setDateRange(getRange(rangeType, times));
@@ -39,9 +52,8 @@ const ReactAppoint: React.FC<IReactAppointProps> = ({
         setDateRange(getRange(rangeType, times, startDate, endDate));
     };
 
-    const handleColumnClick = (date: Dayjs) => {
-        setModalDate(date);
-        setIsModalOpen(true);
+    const handleDateClick = (date: Dayjs) => {
+        onDateClick(date);
     };
 
     return (
@@ -58,11 +70,13 @@ const ReactAppoint: React.FC<IReactAppointProps> = ({
                 rangeType={rangeType}
                 dateRange={dateRange}
                 times={times}
-                handleColumnClick={handleColumnClick}
+                handleColumnClick={handleDateClick}
             />
 
             {isModalOpen ? (
-                <Modal setIsModalOpen={setIsModalOpen} currentDate={modalDate} />
+                <Modal setIsModalOpen={setIsModalOpen}>
+                    {modalContent}
+                </Modal>
             ) : null}
         </div>
     );

@@ -4,11 +4,12 @@ import { Dayjs } from "dayjs";
 
 import CalendarBody from "../CalendarBody/CalendarBody";
 import CalendarHeader from "../CalendarHeader/CalendarHeader";
+import { IAppointment } from "../../models/appointment";
 import { ITimes } from "../../models/times";
 import { TRange, TRangeType } from "../../models/date";
 
 interface ICalendarProps {
-    appointments: string[];
+    appointments: IAppointment[];
     dateRange: TRange;
     rangeType: TRangeType;
     handleColumnClick(date: Dayjs): void;

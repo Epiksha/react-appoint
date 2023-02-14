@@ -1,16 +1,15 @@
 import classNames from "classnames";
-import { Dayjs } from "dayjs";
 import { useRef } from "react";
 
 interface IModalProps {
+    children?: React.ReactNode;
     className?: string;
-    currentDate: Dayjs;
     setIsModalOpen(value: boolean): void;
 }
 
 const Modal: React.FC<IModalProps> = ({
+    children,
     className,
-    currentDate,
     setIsModalOpen,
 }) => {
     const modalRef = useRef<HTMLDivElement>(null);
@@ -20,7 +19,7 @@ const Modal: React.FC<IModalProps> = ({
     };
 
     const handleModalClick = (event: React.MouseEvent<HTMLDivElement>) => {
-        if (event.currentTarget === modalRef.current) {
+        if (event.target === modalRef.current) {
             closeModal();
         }
     };
@@ -28,11 +27,11 @@ const Modal: React.FC<IModalProps> = ({
     return (
         <div
             ref={modalRef}
-            className={classNames("modal", className)}
+            className={classNames("ra-modal", className, { "ra-modal--default": !children })}
             onClick={handleModalClick}
         >
-            <div className="modal__box">
-                {currentDate.format("DD MMMM YYYY")}
+            <div className="ra-modal__box">
+                {children}
             </div>
         </div>
     );

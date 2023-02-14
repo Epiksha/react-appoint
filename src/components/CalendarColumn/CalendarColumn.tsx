@@ -13,11 +13,18 @@ const CalendarColumn: React.FC<ICalendarColumnProps> = ({
     handleColumnClick,
     label,
 }) => {
+    const handleDateClick = (event: React.MouseEvent) => {
+        event.stopPropagation();
+        event.preventDefault();
+
+        handleColumnClick(date);
+    };
+
     return (
         <button
             key={date.format("YYYY-MM-DDTHH:mm:ssZ")}
             className={classNames("ra-calendar-column", className)}
-            onClick={() => handleColumnClick(date)}
+            onClick={handleDateClick}
         >
             <span className="ra-calendar-column__label">{label}</span>
         </button>

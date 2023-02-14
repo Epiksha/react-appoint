@@ -1,8 +1,7 @@
 /// <reference types="react" />
-import { Dayjs } from "dayjs";
 interface IModalProps {
+    children?: React.ReactNode;
     className?: string;
-    currentDate: Dayjs;
     setIsModalOpen(value: boolean): void;
 }
 declare const Modal: React.FC<IModalProps>;
