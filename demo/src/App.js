@@ -5,18 +5,18 @@ import { ReactAppoint } from "react-appoint";
 const defaultAppointments = [
     {
         title: "Company Meeting",
-        startDate: dayjs().startOf("day").add(9),
-        endDate: dayjs().endOf("day").add(17),
+        startDate: dayjs().startOf("day").add(9, "hour"),
+        endDate: dayjs().startOf("day").add(17, "hour").add(2, "day"),
     },
     {
         title: "Client Briefing",
-        startDate: dayjs().add(1, "day").add(9),
-        endDate: dayjs().add(7, "day").add(17),
+        startDate: dayjs().add(1, "day").add(9, "hour"),
+        endDate: dayjs().add(7, "day").add(17, "hour"),
     },
     {
         title: "Internal Test",
-        startDate: dayjs().add(2, "day").startOf("day").add(9),
-        endDate: dayjs().add(2, "day").endOf("day").add(17),
+        startDate: dayjs().add(2, "day").startOf("day").add(9, "hour"),
+        endDate: dayjs().add(2, "day").endOf("day").add(17, "hour"),
     },
 ];
 
@@ -65,17 +65,32 @@ const App = () => {
                 <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
                     <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
                         <label>Title</label>
-                        <input type="text" value={currentModalTitle} onChange={(event) => handleFieldChange(event, "title")}></input>
+
+                        <input
+                            type="text"
+                            value={currentModalTitle}
+                            onChange={(event) => handleFieldChange(event, "title")}
+                        />
                     </div>
 
                     <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
                         <label>Start Date</label>
-                        <input type="date" value={currentModalStartDate} onChange={(event) => handleFieldChange(event, "startDate")}></input>
+
+                        <input
+                            type="datetime-local"
+                            value={currentModalStartDate.format("YYYY-MM-DDTHH:mm")}
+                            onChange={(event) => handleFieldChange(event, "startDate")}
+                        />
                     </div>
 
                     <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
                         <label>End Date</label>
-                        <input type="date" value={currentModalEndDate} onChange={(event) => handleFieldChange(event, "endDate")}></input>
+
+                        <input
+                            type="datetime-local"
+                            value={currentModalEndDate.format("YYYY-MM-DDTHH:mm")}
+                            onChange={(event) => handleFieldChange(event, "endDate")}
+                        />
                     </div>
 
                     <button type="submit">Add Appointment</button>

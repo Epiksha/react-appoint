@@ -1,7 +1,7 @@
 import { Dayjs } from "dayjs";
 
 export interface IAppointment {
-    title: Date | string | Dayjs;
+    title: string;
     startDate: Date | string | Dayjs;
     endDate: Date | string | Dayjs;
 };

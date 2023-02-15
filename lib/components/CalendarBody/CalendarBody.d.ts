@@ -1,8 +1,8 @@
 /// <reference types="react" />
 import { Dayjs } from "dayjs";
 import { IAppointment } from "../../models/appointment";
-import { TRange, TRangeType } from "../../models/date";
 import { ITimes } from "../../models/times";
+import { TRange, TRangeType } from "../../models/date";
 interface ICalendarBodyProps {
     appointments: IAppointment[];
     dateRange: TRange;

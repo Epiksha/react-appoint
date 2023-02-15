@@ -1,0 +1,29 @@
+.ra-appointment {
+    text-align: center;
+
+    position: relative;
+    z-index: 1;
+
+    overflow: hidden;
+    box-sizing: border-box;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 0.5rem;
+
+    background-color: $color-action;
+    color: white;
+
+    cursor: pointer;
+    transition: background-color 250ms;
+
+    &:hover {
+        background-color: $color-action--hover;
+    }
+
+    &__title {
+        margin: 0;
+
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+}

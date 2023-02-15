@@ -1,9 +1,9 @@
 import { Dayjs } from "dayjs";
-import { IAppointment } from "../../models/appointment";
 
-import { TRange, TRangeType } from "../../models/date";
-import { ITimes } from "../../models/times";
 import CalendarColumn from "../CalendarColumn/CalendarColumn";
+import { IAppointment } from "../../models/appointment";
+import { ITimes } from "../../models/times";
+import { TRange, TRangeType } from "../../models/date";
 
 interface ICalendarBodyProps {
     appointments: IAppointment[];
@@ -22,6 +22,7 @@ const CalendarBody: React.FC<ICalendarBodyProps> = ({
         <div className="ra-calendar-body">
             {dateRange.items.map((column: any) => (
                 <CalendarColumn
+                    appointments={appointments}
                     key={column.key}
                     {...column}
                     handleColumnClick={handleColumnClick}
