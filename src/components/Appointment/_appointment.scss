@@ -1,3 +1,9 @@
+.ra-appointments {
+    display: grid;
+    gap: 0.5rem;
+    margin-top: 2rem;
+}
+
 .ra-appointment {
     text-align: center;
 
@@ -6,6 +12,7 @@
 
     overflow: hidden;
     box-sizing: border-box;
+    width: 100%;
     padding: 0.5rem;
     border: none;
     border-radius: 0.5rem;

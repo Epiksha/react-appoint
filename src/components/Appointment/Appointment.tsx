@@ -1,31 +1,23 @@
-import dayjs, { Dayjs } from "dayjs";
 import { IAppointment } from "../../models/appointment";
+import { TRangeType } from "../../models/date";
 
 interface IAppointmentProps extends IAppointment {
+    rangeType: TRangeType;
 }
 
-const Appointment: React.FC<IAppointmentProps> = ({
-    endDate,
-    startDate,
-    title,
-}) => {
-    const days = dayjs(endDate).diff(dayjs(startDate), "days");
+const Appointment: React.FC<IAppointmentProps> = (props) => {
+    const { endDate, startDate, title } = props;
 
     const handleAppointmentClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.stopPropagation();
         event.preventDefault();
 
-        console.log({
-            endDate,
-            startDate,
-            title,
-        });
+        console.log(props);
     };
 
     return (
         <button
             className="ra-appointment"
-            style={{ width: `${100 * days}%` }}
             onClick={handleAppointmentClick}
         >
             <p className="ra-appointment__title">

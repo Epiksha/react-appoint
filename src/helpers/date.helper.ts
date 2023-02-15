@@ -15,7 +15,7 @@ export const generateTimedColumns = (
 
     while (tempTime.isBefore(endTime) || tempTime.isSame(endTime)) {
         const columns: IColumn[] = [{
-            className: "ra-calendar-column--time",
+            isTimeColumn: true,
             date: tempTime,
             key: tempTime.format("YYYYMMDDHH:mm") + "-label",
             label: tempTime.format("HH:mm a"),
@@ -130,9 +130,9 @@ export const getMonthRange = (
         };
 
         if (tempDate.isBefore(startDate) || tempDate.isAfter(endDate)) {
-            column.className = "ra-calendar-column__trigger--blur";
+            column.className = "ra-calendar-column--blur";
         } else if (tempDate.format("YYYY-MMMM-DD") === dayjs().format("YYYY-MMMM-DD")) {
-            column.className = "ra-calendar-column__trigger--current";
+            column.className = "ra-calendar-column--current";
         }
 
         month.items.push(column);

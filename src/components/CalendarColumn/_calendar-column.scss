@@ -1,7 +1,5 @@
 .ra-calendar-column {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+    display: grid;
 
     position: relative;
 
@@ -80,14 +78,20 @@
             background-color: rgba($color: #46a3cb, $alpha: 0.2);
         }
 
-        &--blur {
+        .ra-calendar-column--blur & {
             color: $color-gray-1;
         }
 
-        &-label {
-            .ra-calendar--month .ra-calendar-column__trigger--current & {
-                position: relative;
+        .ra-calendar--month & {
+            padding: 1.5rem 0.5rem 0.5rem;
+        }
 
+        &-label {
+            position: absolute;
+            top: 0.5rem;
+            left: 0.5rem;
+
+            .ra-calendar--month .ra-calendar-column--current & {
                 color: white;
 
                 &:before {
@@ -109,5 +113,4 @@
             }
         }
     }
-
 }

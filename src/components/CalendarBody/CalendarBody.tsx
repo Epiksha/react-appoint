@@ -17,6 +17,7 @@ const CalendarBody: React.FC<ICalendarBodyProps> = ({
     appointments,
     dateRange,
     handleColumnClick,
+    rangeType,
 }) => {
     return (
         <div className="ra-calendar-body">
@@ -26,6 +27,7 @@ const CalendarBody: React.FC<ICalendarBodyProps> = ({
                     key={column.key}
                     {...column}
                     handleColumnClick={handleColumnClick}
+                    rangeType={rangeType}
                 />
             ))}
         </div>

@@ -11,6 +11,7 @@ export type TRange = {
 export interface IColumn {
     className?: string;
     date: Dayjs;
+    isTimeColumn?: boolean;
     label?: string;
     key: string;
 }
